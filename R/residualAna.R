@@ -1,4 +1,4 @@
-#' RA
+#' resdiualAna
 #'
 #' Function to automate residual analysis.
 #' It outputs several partial regression plots
@@ -7,9 +7,9 @@
 #' @keywords Residual-analysis
 #' @export
 #' @examples
-#' RA()
+#' resdiualAna()
 
-RA <- function(model){
+resdiualAna <- function(model){
   prb <- lm(model, data=dsCase)
   yhat <- fitted(prb)
   ehat <- residuals(prb)
