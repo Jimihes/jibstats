@@ -1,4 +1,4 @@
-#' modelmaker
+#' modelsmaker
 #'
 #' Takes a formula object as input and outputs two new formulae.
 #' It's use is to create the models required in residual analysis.
@@ -9,9 +9,9 @@
 #' @keywords modelmaker
 #' @export
 #' @examples
-#' modelmaker()
+#' modelsmaker()
 
-modelmaker <- function(model, excl){
+modelsmaker <- function(model, excl){
   varl <- all.vars(model)
   assign(x = "tmp",value = dsCase[complete.cases(dsCase[c(varl)]),c(varl)],
          pos= 1)

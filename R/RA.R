@@ -43,7 +43,7 @@ RA <- function(model){
 
   varl <- all.vars(model)
   for (i in 2:length(varl)){
-    modelmaker(model,varl[i])
+    modelsmaker(model,varl[i])
     print(all.vars(newmodelDV))
     print(str(newmodelDV))
     print(head(tmp))
