@@ -4,7 +4,7 @@
 \alias{modelsmaker}
 \title{modelsmaker}
 \usage{
-modelsmaker(model, excl)
+modelsmaker(model, excl, data = dsCase)
 }
 \arguments{
 \item{model}{The formula object representing your raw model}

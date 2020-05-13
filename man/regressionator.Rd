@@ -10,11 +10,12 @@ regressionator(
   dep = vars[1],
   name = "",
   quadr = "",
-  dsCase = dsCase
+  data = dsCase,
+  residualAna = FALSE
 )
 }
 \arguments{
-\item{vars}{List of variables to include in model}
+\item{vars}{List of variables to make formula, or formula object}
 
 \item{method}{OLS, probit or tobit}
 
@@ -23,6 +24,8 @@ regressionator(
 \item{name}{A name for stargazer output. .doc extension is added}
 
 \item{quadr}{non-linear variables to add as quadratic}
+
+\item{residualAna}{Wether to do a residualanalysis}
 
 \item{dsCase}{Dataset of your case, defaults to, possibly non-existent, dsCase}
 }

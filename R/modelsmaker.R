@@ -11,17 +11,13 @@
 #' @examples
 #' modelsmaker()
 
-modelsmaker <- function(model, excl){
+modelsmaker <- function(model, excl, data=dsCase){
   varl <- all.vars(model)
-  assign(x = "tmp",value = dsCase[complete.cases(dsCase[c(varl)]),c(varl)],
-         pos= 1)
-  print(head(tmp))
   varl <- varl[-match(excl, varl)]
   newmodelDV <- paste0(varl[1], " ~ ")
-  assign(x="newmodelDV", value = formula(paste0(newmodelDV,
-                                                paste0(varl[2:length(varl)], collapse = " + "))),
-         pos = 1)
+  newmodelDV <<- formula(paste0(newmodelDV,
+                            paste0(varl[2:length(varl)], collapse = " + ")))
   newmodelIV <- paste0(excl, " ~ ")
   newmodelIV <<-  formula(paste0(newmodelIV,
                                  paste0(varl[2:length(varl)], collapse = " + ")))
-}
+  }
