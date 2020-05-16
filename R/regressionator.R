@@ -24,9 +24,11 @@ regressionator <- function(vars, method="OLS", dep = vars[1], name = "", quadr =
       vars <- c(vars, j)
     }}
 
+  if (dep == vars[1]) vars <- vars[2:length(vars)]
   newformula <- paste0(dep, " ~ ")
-  newformula <-  formula(paste0(newformula,paste0(vars[2:length(vars)], collapse = " + ")))
-    if (method == "OLS"){
+  newformula <-  formula(paste0(newformula,paste0(vars, collapse = " + ")))
+
+  if (method == "OLS"){
     newmodel <- lm(formula = newformula, data = data)
   }else if (method == "probit"){
     newmodel <- glm(newformula, data=data, family = binomial(link = "probit"))
