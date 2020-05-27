@@ -2,7 +2,7 @@
 #'
 #' Create formula object from list of variables and outputs in stargazer
 #' @param vars List of variables to make formula, or formula object
-#' @param method OLS, probit or tobit
+#' @param method OLS, logit, probit or tobit
 #' @param dep Dependent variable, defaults to first item in vars
 #' @param name A name for stargazer output. .doc extension is added
 #' @param quadr non-linear variables to add as quadratic
@@ -13,8 +13,8 @@
 #' @examples regressionator(vars = c(k, EXTERNAL, BATH:SMOOTH))
 #' regressionator()
 
-regressionator <- function(vars, method="OLS", dep = vars[1], name = "", quadr ="",
-                           data = dsCase, residualAna = FALSE){
+regressionator <- function(vars, data = dsCase, dep = vars[1],
+                            residualAna = FALSE, quadr ="", method="OLS", name = ""){
   if (is_formula(vars)) vars <- all.vars(vars)
   if (quadr != ""){
     quadr <- c(quadr)
@@ -30,9 +30,13 @@ regressionator <- function(vars, method="OLS", dep = vars[1], name = "", quadr =
 
   if (method == "OLS"){
     newmodel <- lm(formula = newformula, data = data)
+  }else if (method == "logit"){
+    newmodel <- glm(newformula, data=data, family = binomial(link = "logit"))
+  }else if (method == "tobit"){
+    newmodel <- AER::tobit(newformula, data = data)
   }else if (method == "probit"){
     newmodel <- glm(newformula, data=data, family = binomial(link = "probit"))
-  }else if (method == "tobit"){}
+  }
 
   if(name == ""){
     name == paste0(force(method), "_model")
@@ -42,7 +46,7 @@ regressionator <- function(vars, method="OLS", dep = vars[1], name = "", quadr =
   stargazer(newmodel, out = paste0(dirRslt,name,".doc"), summary = FALSE, type = "html")
   sink()
   cat("Model opgeslagen \n\n")
-  if (residualAna == TRUE){
+  if (residualAna == TRUE & method == "OLS"){
   residualAna(newformula, data=data)}
   return(newmodel)
   }

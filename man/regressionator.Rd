@@ -6,26 +6,26 @@
 \usage{
 regressionator(
   vars,
-  method = "OLS",
-  dep = vars[1],
-  name = "",
-  quadr = "",
   data = dsCase,
-  residualAna = FALSE
+  dep = vars[1],
+  residualAna = FALSE,
+  quadr = "",
+  method = "OLS",
+  name = ""
 )
 }
 \arguments{
 \item{vars}{List of variables to make formula, or formula object}
 
-\item{method}{OLS, probit or tobit}
-
 \item{dep}{Dependent variable, defaults to first item in vars}
 
-\item{name}{A name for stargazer output. .doc extension is added}
+\item{residualAna}{Wether to do a residualanalysis}
 
 \item{quadr}{non-linear variables to add as quadratic}
 
-\item{residualAna}{Wether to do a residualanalysis}
+\item{method}{OLS, logit, probit or tobit}
+
+\item{name}{A name for stargazer output. .doc extension is added}
 
 \item{dsCase}{Dataset of your case, defaults to, possibly non-existent, dsCase}
 }
